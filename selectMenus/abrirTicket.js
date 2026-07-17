@@ -1,4 +1,4 @@
-import { 
+import {
     ActionRowBuilder,
     ModalBuilder,
     TextInputBuilder,
@@ -6,74 +6,71 @@ import {
 } from "discord.js";
 
 
-export default {
-    customId: "abrirTicket",
 
-    async execute(interaction) {
+export default {
+
+
+    customId:"abrirTicket",
+
+
+    async execute(interaction){
+
 
         const escolha = interaction.values[0];
 
 
-        // 🚨 DENÚNCIA
-        if (escolha === "denuncia") {
 
-            await interaction.reply({
-                content: "🚨 Sistema de denúncia em desenvolvimento.",
-                ephemeral: true
-            });
+        if(escolha === "teste_tatico"){
 
-        }
-
-
-        // ❓ DÚVIDAS
-        if (escolha === "duvidas") {
-
-            await interaction.reply({
-                content: "❓ Sistema de dúvidas em desenvolvimento.",
-                ephemeral: true
-            });
-
-        }
-
-
-        // 🪖 TESTE TÁTICO
-        if (escolha === "teste_tatico") {
 
 
             const modal = new ModalBuilder()
-                .setCustomId("testeTatico")
-                .setTitle("🪖 Solicitar Teste Tático");
+
+            .setCustomId("testeTatico")
+            .setTitle("🪖 Solicitar Teste Tático");
+
 
 
             const data = new TextInputBuilder()
-                .setCustomId("dataTeste")
-                .setLabel("📅 Data do teste")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("Ex: 20/07/2026")
-                .setRequired(true);
+
+            .setCustomId("dataTeste")
+            .setLabel("📅 Data")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(true);
+
 
 
             const hora = new TextInputBuilder()
-                .setCustomId("horaTeste")
-                .setLabel("🕒 Hora do teste")
-                .setStyle(TextInputStyle.Short)
-                .setPlaceholder("Ex: 20:30")
-                .setRequired(true);
+
+            .setCustomId("horaTeste")
+            .setLabel("🕒 Hora")
+            .setStyle(TextInputStyle.Short)
+            .setRequired(true);
+
 
 
 
             modal.addComponents(
-                new ActionRowBuilder()
-                    .addComponents(data),
 
                 new ActionRowBuilder()
-                    .addComponents(hora)
+                .addComponents(data),
+
+
+                new ActionRowBuilder()
+                .addComponents(hora)
+
             );
 
 
-            await interaction.showModal(modal);
+
+            return interaction.showModal(modal);
+
 
         }
 
+
+
     }
+
+
 };
