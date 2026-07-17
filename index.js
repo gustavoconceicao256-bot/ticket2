@@ -7,14 +7,18 @@ import {
     Collection
 } from "discord.js";
 
+
 import keepAlive from "./utils/keepAlive.js";
 
-import commandHandler from "./Condutores/commandHandler.js";
-import eventHandler from "./Condutores/eventHandler.js";
-import registrarComandos from "./Condutores/registrarComandos.js";
+
+import commandHandler from "./handlers/commandHandler.js";
+import eventHandler from "./handlers/eventHandler.js";
+import registrarComandos from "./handlers/registrarComandos.js";
+
 
 
 keepAlive();
+
 
 
 const client = new Client({
@@ -31,7 +35,9 @@ const client = new Client({
 });
 
 
+
 client.commands = new Collection();
+
 
 
 await commandHandler(client);
@@ -39,6 +45,7 @@ await commandHandler(client);
 await registrarComandos(client);
 
 await eventHandler(client);
+
 
 
 client.login(process.env.TOKEN);
