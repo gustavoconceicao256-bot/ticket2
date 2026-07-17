@@ -1,34 +1,38 @@
 import dotenv from "dotenv";
 dotenv.config();
 
-import keepAlive from "./config/utils/keepAlive.js";
-
 import {
     Client,
-    GatewayIntentBits
+    GatewayIntentBits,
+    Collection
 } from "discord.js";
+
+import keepAlive from "./utils/keepAlive.js";
+import eventHandler from "./Condutores/eventHandler.js";
+
 
 keepAlive();
 
+
 const client = new Client({
+
     intents: [
+
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
+
     ]
-});
-
-client.once("clientReady", () => {
-
-    console.clear();
-
-    console.log("==================================");
-    console.log("🤖 BOT ONLINE");
-    console.log(`👤 ${client.user.tag}`);
-    console.log(`🆔 ${client.user.id}`);
-    console.log("==================================");
 
 });
+
+
+client.commands = new Collection();
+
+
+await eventHandler(client);
+
+
 
 client.login(process.env.TOKEN);
