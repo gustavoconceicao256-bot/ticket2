@@ -2,48 +2,48 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-
 export default async function commandHandler(client) {
 
-
-    const pastaComandos = path.join(
+    const commandsPath = path.join(
         __dirname,
         "../Comandos"
     );
 
 
-    const arquivos = fs.readdirSync(pastaComandos)
-        .filter(arquivo => arquivo.endsWith(".js"));
+    if (!fs.existsSync(commandsPath)) {
+
+        console.log("⚠️ Pasta Comandos não encontrada.");
+        return;
+
+    }
 
 
+    const files = fs.readdirSync(commandsPath)
+        .filter(file => file.endsWith(".js"));
 
-    for (const arquivo of arquivos) {
 
+    for (const file of files) {
 
-        const caminho = path.join(
-            pastaComandos,
-            arquivo
+        const command = await import(
+            `../Comandos/${file}`
         );
 
 
-        const comando = await import(caminho);
-
-
-
         client.commands.set(
-            comando.default.name,
-            comando.default
+            command.default.name,
+            command.default
         );
 
 
     }
 
 
-    console.log("✅ Comandos carregados.");
+    console.log(
+        `✅ ${files.length} comandos carregados`
+    );
 
 }
