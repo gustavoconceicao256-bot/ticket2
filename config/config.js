@@ -1,30 +1,47 @@
 const config = {
 
+    canais: {
 
-    canais:{
-
-
-        solicitacoesTeste:
-        "COLOQUE_ID_DO_CANAL_DE_TESTES",
+        // Canal onde aparecem os Testes Táticos
+        solicitacoesTeste: "1523401108007944343",
 
 
-        logs:
-        "COLOQUE_ID_DO_CANAL_DE_LOGS"
+        // Canal onde ficam os tickets
+        tickets: "1524497169632071800",
 
+
+        // Canal onde ficam os logs
+        logs: "1527755533388611594"
 
     },
 
 
+    cargos: {
 
-    cargos:{
+
+        // Cargos que podem aceitar ou recusar Teste Tático 🪖
+        testeTatico: [
+
+            "1460499655640092780",
+            "1522793484036083812"
+
+        ],
 
 
-        liderTatico:
-        "COLOQUE_ID_DO_CARGO"
+
+        // Cargos que podem finalizar atendimento 🔒
+        finalizarTicket: [
+
+            "1521984073969569883",
+            "1522086542716305548",
+            "1522086730008629289",
+            "1460499655640092780",
+            "1522793484036083812"
+
+        ]
 
 
     }
-
 
 
 };
