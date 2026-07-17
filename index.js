@@ -8,8 +8,12 @@ import {
 } from "discord.js";
 
 import keepAlive from "./utils/keepAlive.js";
-import eventHandler from "./Condutores/eventHandler.js";
+
+import eventHandler from "./handlers/eventHandler.js";
+
 import commandHandler from "./Condutores/commandHandler.js";
+
+import registrarComandos from "./Condutores/registrarComandos.js";
 
 
 keepAlive();
@@ -29,11 +33,16 @@ const client = new Client({
 });
 
 
+
 client.commands = new Collection();
 
 
 
 await commandHandler(client);
+
+
+await registrarComandos();
+
 
 await eventHandler(client);
 
