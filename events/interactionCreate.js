@@ -3,11 +3,10 @@ import testeTatico from "../Modais/testeTatico.js";
 
 import aceitarTeste from "../Botões/aceitarTeste.js";
 import recusarTeste from "../Botões/recusarTeste.js";
-
+import finalizarTicket from "../Botões/finalizarTicket.js";
 
 
 export default {
-
 
     name: "interactionCreate",
 
@@ -15,13 +14,12 @@ export default {
     async execute(interaction) {
 
 
+        // MENU SELECT
 
-        // MENU
-
-        if(interaction.isStringSelectMenu()){
+        if (interaction.isStringSelectMenu()) {
 
 
-            if(interaction.customId === "abrirTicket"){
+            if (interaction.customId === "abrirTicket") {
 
                 return abrirTicket.execute(interaction);
 
@@ -35,10 +33,10 @@ export default {
 
         // MODAL
 
-        if(interaction.isModalSubmit()){
+        if (interaction.isModalSubmit()) {
 
 
-            if(interaction.customId === "testeTatico"){
+            if (interaction.customId === "testeTatico") {
 
                 return testeTatico.execute(interaction);
 
@@ -53,11 +51,11 @@ export default {
 
         // BOTÕES
 
+        if (interaction.isButton()) {
 
-        if(interaction.isButton()){
 
 
-            if(interaction.customId.startsWith("aceitarTeste_")){
+            if (interaction.customId.startsWith("aceitarTeste_")) {
 
                 return aceitarTeste.execute(interaction);
 
@@ -65,11 +63,21 @@ export default {
 
 
 
-            if(interaction.customId.startsWith("recusarTeste_")){
+            if (interaction.customId.startsWith("recusarTeste_")) {
 
                 return recusarTeste.execute(interaction);
 
             }
+
+
+
+
+            if (interaction.customId === "finalizarTicket") {
+
+                return finalizarTicket.execute(interaction);
+
+            }
+
 
 
         }
