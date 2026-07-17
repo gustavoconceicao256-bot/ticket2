@@ -9,9 +9,8 @@ import {
 
 import keepAlive from "./utils/keepAlive.js";
 
-import eventHandler from "./handlers/eventHandler.js";
-import commandHandler from "./handlers/commandHandler.js";
-
+import commandHandler from "./Condutores/commandHandler.js";
+import eventHandler from "./Condutores/eventHandler.js";
 import registrarComandos from "./Condutores/registrarComandos.js";
 
 
@@ -38,11 +37,21 @@ client.commands = new Collection();
 
 await commandHandler(client);
 
-
-await registrarComandos();
-
+await registrarComandos(client);
 
 await eventHandler(client);
+
+
+
+client.once("ready", () => {
+
+    console.log("==================================");
+    console.log("🤖 BOT ONLINE");
+    console.log(`👤 ${client.user.tag}`);
+    console.log(`🆔 ${client.user.id}`);
+    console.log("==================================");
+
+});
 
 
 
