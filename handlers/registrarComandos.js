@@ -1,10 +1,7 @@
-import { REST, Routes } from "discord.js";
 import fs from "fs";
 import path from "path";
+import { REST, Routes } from "discord.js";
 import { fileURLToPath } from "url";
-
-import dotenv from "dotenv";
-dotenv.config();
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -12,36 +9,48 @@ const __dirname = path.dirname(__filename);
 
 
 
-export default async function registrarComandos() {
+export default async function registrarComandos(client) {
 
 
-    const comandos = [];
+    const commands = [];
 
 
-    const pasta = path.join(
+    const commandsPath = path.join(
         __dirname,
         "../Comandos"
     );
 
 
-    const arquivos = fs.readdirSync(pasta)
+
+    if (!fs.existsSync(commandsPath)) {
+
+        console.log("⚠️ Pasta Comandos não encontrada.");
+        return;
+
+    }
+
+
+
+    const files = fs.readdirSync(commandsPath)
         .filter(file => file.endsWith(".js"));
 
 
 
-    for (const arquivo of arquivos) {
+    for (const file of files) {
 
 
-        const caminho = path.join(
-            pasta,
-            arquivo
+        const command = await import(
+            `../Comandos/${file}`
         );
 
 
-        const comando = await import(caminho);
+        if(command.default?.data){
 
+            commands.push(
+                command.default.data.toJSON()
+            );
 
-        comandos.push(comando.default.data.toJSON());
+        }
 
 
     }
@@ -49,11 +58,10 @@ export default async function registrarComandos() {
 
 
     const rest = new REST({
-
         version: "10"
-
-    }).setToken(process.env.TOKEN);
-
+    }).setToken(
+        process.env.TOKEN
+    );
 
 
 
@@ -64,15 +72,15 @@ export default async function registrarComandos() {
         ),
 
         {
-
-            body: comandos
-
+            body: commands
         }
 
     );
 
 
+    console.log(
+        `✅ ${commands.length} comandos registrados`
+    );
 
-    console.log("✅ Comandos registrados.");
 
 }
