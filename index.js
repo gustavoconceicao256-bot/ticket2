@@ -34,25 +34,11 @@ const client = new Client({
 client.commands = new Collection();
 
 
-
 await commandHandler(client);
 
 await registrarComandos(client);
 
 await eventHandler(client);
-
-
-
-client.once("ready", () => {
-
-    console.log("==================================");
-    console.log("🤖 BOT ONLINE");
-    console.log(`👤 ${client.user.tag}`);
-    console.log(`🆔 ${client.user.id}`);
-    console.log("==================================");
-
-});
-
 
 
 client.login(process.env.TOKEN);
