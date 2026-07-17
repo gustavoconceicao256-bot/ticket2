@@ -9,6 +9,7 @@ import {
 
 import keepAlive from "./utils/keepAlive.js";
 import eventHandler from "./Condutores/eventHandler.js";
+import commandHandler from "./Condutores/commandHandler.js";
 
 
 keepAlive();
@@ -30,6 +31,9 @@ const client = new Client({
 
 client.commands = new Collection();
 
+
+
+await commandHandler(client);
 
 await eventHandler(client);
 
