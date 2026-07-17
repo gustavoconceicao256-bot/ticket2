@@ -9,13 +9,12 @@ import {
 } from "discord.js";
 
 
-import commandHandler from "./Condutores/commandHandler.js";
-import eventHandler from "./Condutores/eventHandler.js";
-import registrarComandos from "./Condutores/registrarComandos.js";
+import commandHandler from "./handlers/commandHandler.js";
+import eventHandler from "./handlers/eventHandler.js";
+import registrarComandos from "./handlers/registrarComandos.js";
 
 
 import keepAlive from "./utils/keepAlive.js";
-
 
 
 keepAlive();
@@ -41,28 +40,13 @@ client.commands = new Collection();
 
 
 
-try {
+await commandHandler(client);
 
 
-    await commandHandler(client);
+await registrarComandos(client);
 
 
-    await registrarComandos(client);
-
-
-    await eventHandler(client);
-
-
-
-} catch (error) {
-
-
-    console.error("❌ Erro ao carregar sistema:");
-
-    console.error(error);
-
-
-}
+await eventHandler(client);
 
 
 
