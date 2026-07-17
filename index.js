@@ -1,53 +1,35 @@
+import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
-dotenv.config();
 
-
-import {
-    Client,
-    GatewayIntentBits,
-    Collection
-} from "discord.js";
-
-
-import commandHandler from "./handlers/commandHandler.js";
-import eventHandler from "./handlers/eventHandler.js";
-import registrarComandos from "./handlers/registrarComandos.js";
-
+import commandHandler from "./Condutores/commandHandler.js";
+import eventHandler from "./Condutores/eventHandler.js";
+import registrarComandos from "./Condutores/registrarComandos.js";
 
 import keepAlive from "./utils/keepAlive.js";
 
-
-keepAlive();
-
-
+dotenv.config();
 
 const client = new Client({
-
     intents: [
-
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMembers,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent
-
     ]
-
 });
 
-
-
-client.commands = new Collection();
-
-
+keepAlive();
 
 await commandHandler(client);
 
-
 await registrarComandos(client);
-
 
 await eventHandler(client);
 
-
-
-client.login(process.env.TOKEN);
+client.login(process.env.TOKEN)
+    .then(() => {
+        console.log("🤖 Bot conectado com sucesso!");
+    })
+    .catch((err) => {
+        console.error("❌ Erro ao conectar o bot:", err);
+    });
