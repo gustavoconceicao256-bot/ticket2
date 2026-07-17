@@ -1,12 +1,9 @@
 import express from "express";
 
-
 const app = express();
 
 
-
-export default function keepAlive() {
-
+function keepAlive() {
 
     app.get("/", (req, res) => {
 
@@ -15,12 +12,13 @@ export default function keepAlive() {
     });
 
 
-
     app.listen(3000, () => {
 
-        console.log("🌐 Keep Alive iniciado.");
+        console.log("🌐 Keep Alive ativo.");
 
     });
 
-
 }
+
+
+export default keepAlive;
