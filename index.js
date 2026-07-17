@@ -10,8 +10,7 @@ import {
 import keepAlive from "./utils/keepAlive.js";
 
 import eventHandler from "./handlers/eventHandler.js";
-
-import commandHandler from "./Condutores/commandHandler.js";
+import commandHandler from "./handlers/commandHandler.js";
 
 import registrarComandos from "./Condutores/registrarComandos.js";
 
@@ -31,7 +30,6 @@ const client = new Client({
     ]
 
 });
-
 
 
 client.commands = new Collection();
