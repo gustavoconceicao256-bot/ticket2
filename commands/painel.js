@@ -22,7 +22,7 @@ export default {
             .setColor(config.visual.color)
 
             .setAuthor({
-                name: "👑 GTT • Sistema de Atendimento",
+                name: "👑 GTT • Sistema Oficial",
                 iconURL: config.visual.thumbnail
             })
 
@@ -30,24 +30,29 @@ export default {
 
             .setDescription(`
 
-Bem-vindo ao sistema oficial de atendimento da **GTT**.
-
-Selecione uma categoria abaixo para abrir um ticket com nossa equipe.
+Bem-vindo ao sistema oficial da **GTT**.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-🚨 **Denúncias**
-Reporte qualquer ocorrência.
+🚨 **DENÚNCIAS**
 
-❓ **Dúvidas**
-Converse com nossa equipe.
-
-🪖 **Teste Tático**
-Solicite seu teste.
+Reporte qualquer jogador ou membro.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-> Escolha uma opção no menu abaixo.
+❓ **DÚVIDAS**
+
+Abra um atendimento com nossa equipe.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+🪖 **TESTE TÁTICO**
+
+Solicite seu horário para realizar o teste.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+> Escolha uma categoria no menu abaixo.
 
 `)
 
@@ -63,7 +68,7 @@ Solicite seu teste.
 
             .setCustomId("abrirTicket")
 
-            .setPlaceholder("📂 Selecione uma categoria")
+            .setPlaceholder("📂 Escolha uma categoria")
 
             .addOptions(
 
@@ -75,13 +80,13 @@ Solicite seu teste.
 
                 {
                     label: "❓ Dúvidas",
-                    description: "Falar com nossa equipe",
+                    description: "Abrir atendimento",
                     value: "duvidas"
                 },
 
                 {
                     label: "🪖 Solicitar Teste Tático",
-                    description: "Agendar um teste",
+                    description: "Solicitar teste",
                     value: "teste_tatico"
                 }
 
