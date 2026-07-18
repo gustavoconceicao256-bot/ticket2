@@ -26,11 +26,8 @@ export default async function criarTicket(interaction, categoria) {
     if (canalExistente) {
 
         return interaction.reply({
-
             content: "❌ Você já possui um atendimento aberto.",
-
             ephemeral: true
-
         });
 
     }
@@ -43,26 +40,21 @@ export default async function criarTicket(interaction, categoria) {
 
         type: ChannelType.GuildText,
 
-
         parent: config.canais.tickets,
 
 
         permissionOverwrites: [
 
-
             {
-
                 id: interaction.guild.id,
 
                 deny: [
                     PermissionFlagsBits.ViewChannel
                 ]
-
             },
 
 
             {
-
                 id: interaction.user.id,
 
                 allow: [
@@ -70,7 +62,6 @@ export default async function criarTicket(interaction, categoria) {
                     PermissionFlagsBits.SendMessages,
                     PermissionFlagsBits.ReadMessageHistory
                 ]
-
             },
 
 
@@ -92,7 +83,6 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
-
     const embed = new EmbedBuilder()
 
         .setTitle(
@@ -100,7 +90,6 @@ export default async function criarTicket(interaction, categoria) {
             ? "🚨 Denúncia"
             : "❓ Dúvidas"
         )
-
 
         .setDescription(
 
@@ -115,10 +104,7 @@ A equipe irá atender você em breve.`
 
         )
 
-
         .setColor("Red");
-
-
 
 
 
@@ -140,8 +126,6 @@ A equipe irá atender você em breve.`
 
 
 
-
-
     await canal.send({
 
         content: `${interaction.user}`,
@@ -154,8 +138,6 @@ A equipe irá atender você em breve.`
 
 
 
-
-
     await interaction.reply({
 
         content: `✅ Seu atendimento foi criado: ${canal}`,
@@ -163,7 +145,6 @@ A equipe irá atender você em breve.`
         ephemeral: true
 
     });
-
 
 
 }
