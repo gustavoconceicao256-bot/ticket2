@@ -38,8 +38,13 @@ export default {
 
 
 
-        const abertoPor =
-            canal.topic || "Não identificado";
+        const usuarioId = canal.topic;
+
+
+
+        const usuario = usuarioId
+            ? await interaction.guild.members.fetch(usuarioId).catch(() => null)
+            : null;
 
 
 
@@ -47,30 +52,94 @@ export default {
 
 
 
+
         const embedLog = new EmbedBuilder()
 
-            .setTitle("📂 TICKET FINALIZADO")
 
-            .setDescription(
-`👤 **Aberto por:**
-${abertoPor}
+            .setColor("#7C3AED")
+
+
+            .setAuthor({
+
+                name: "GTT • SISTEMA DE LOGS",
+
+                iconURL: config.visual.thumbnail
+
+            })
+
+
+
+            .setTitle("🔒 TICKET FINALIZADO")
+
+
+
+            .setDescription(`
+
+👤 **Aberto por:**
+
+${usuario ? usuario : "Não identificado"}
+
+
 
 👮 **Finalizado por:**
+
 ${interaction.user}
 
+
+
 📌 **Categoria:**
-${canal.name.includes("denuncia") ? "DENÚNCIA" : "DÚVIDAS"}
+
+${canal.name.includes("denuncia") ? "🚨 DENÚNCIA" : "❓ SUPORTE"}
+
+
 
 📅 **Data:**
+
 ${agora.data}
 
+
+
 🕒 **Hora:**
-${agora.hora}`
+
+${agora.hora}
+
+
+
+━━━━━━━━━━━━━━━━━━
+
+⚡ GTT • Sistema Oficial
+
+`)
+
+
+
+            .setThumbnail(
+
+                usuario
+                    ? usuario.displayAvatarURL({
+                        dynamic: true,
+                        size: 1024
+                    })
+                    : config.visual.thumbnail
+
             )
 
-            .setColor("Red")
+
+
+            .setFooter({
+
+                text: "GTT • Logs",
+
+                iconURL: config.visual.thumbnail
+
+            })
+
+
 
             .setTimestamp();
+
+
+
 
 
 
@@ -93,6 +162,107 @@ ${agora.hora}`
 
 
 
+
+
+        // MENSAGEM NO PV DO USUÁRIO
+
+        if (usuario) {
+
+
+            const pv = new EmbedBuilder()
+
+
+                .setColor("#22C55E")
+
+
+                .setAuthor({
+
+                    name: "GTT • ATENDIMENTO",
+
+                    iconURL: usuario.displayAvatarURL({
+                        dynamic: true,
+                        size: 1024
+                    })
+
+                })
+
+
+                .setTitle("✅ Atendimento Finalizado")
+
+
+
+                .setDescription(`
+
+Seu atendimento na **GTT** foi encerrado.
+
+
+
+📌 **Categoria:**
+
+\`${canal.name.includes("denuncia") ? "DENÚNCIA" : "SUPORTE"}\`
+
+
+
+👮 **Finalizado por:**
+
+${interaction.user}
+
+
+
+Obrigado por utilizar nosso sistema de atendimento.
+
+
+
+━━━━━━━━━━━━━━━━━━
+
+⚡ GTT • Sistema Oficial
+
+`)
+
+
+
+                .setThumbnail(
+
+                    usuario.displayAvatarURL({
+
+                        dynamic: true,
+
+                        size: 1024
+
+                    })
+
+                )
+
+
+
+                .setFooter({
+
+                    text: "GTT • Atendimento",
+
+                    iconURL: config.visual.thumbnail
+
+                })
+
+
+
+                .setTimestamp();
+
+
+
+            await usuario.send({
+
+                embeds: [pv]
+
+            }).catch(() => {});
+
+
+        }
+
+
+
+
+
+
         await interaction.reply({
 
             content: "🔒 Atendimento finalizado. O canal será fechado.",
@@ -100,6 +270,8 @@ ${agora.hora}`
             ephemeral: true
 
         });
+
+
 
 
 
