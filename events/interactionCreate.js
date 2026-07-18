@@ -4,6 +4,7 @@ import testeTatico from "../modals/testeTatico.js";
 import aceitarTeste from "../buttons/aceitarTeste.js";
 import recusarTeste from "../buttons/recusarTeste.js";
 import finalizarTicket from "../buttons/finalizarTicket.js";
+import sairTicket from "../buttons/sairTicket.js";
 
 
 export default {
@@ -151,6 +152,17 @@ export default {
 
 
                 return finalizarTicket.execute(interaction);
+
+
+            }
+
+
+
+
+            if (interaction.customId === "sairTicket") {
+
+
+                return sairTicket.execute(interaction);
 
 
             }
