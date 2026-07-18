@@ -2,14 +2,14 @@ import {
     ActionRowBuilder,
     ModalBuilder,
     TextInputBuilder,
-    TextInputStyle
+    TextInputStyle,
+    StringSelectMenuBuilder
 } from "discord.js";
 
 import criarTicket from "../utils/criarTicket.js";
 
 
 export default {
-
 
     customId: "abrirTicket",
 
@@ -18,6 +18,54 @@ export default {
 
 
         const escolha = interaction.values[0];
+
+
+
+        // 🔄 RESETAR MENU DO PAINEL
+
+        const menu = new ActionRowBuilder()
+
+            .addComponents(
+
+                new StringSelectMenuBuilder()
+
+                    .setCustomId("abrirTicket")
+
+                    .setPlaceholder("Selecione uma categoria")
+
+                    .addOptions([
+
+                        {
+                            label: "Denúncia",
+                            value: "denuncia",
+                            emoji: "🚨"
+                        },
+
+                        {
+                            label: "Dúvidas",
+                            value: "duvidas",
+                            emoji: "❓"
+                        },
+
+                        {
+                            label: "Teste Tático",
+                            value: "teste_tatico",
+                            emoji: "🪖"
+                        }
+
+                    ])
+
+            );
+
+
+
+        await interaction.message.edit({
+
+            components: [menu]
+
+        }).catch(() => {});
+
+
 
 
 
@@ -95,17 +143,14 @@ export default {
 
             modal.addComponents(
 
+                new ActionRowBuilder()
+
+                    .addComponents(data),
+
 
                 new ActionRowBuilder()
 
-                .addComponents(data),
-
-
-
-                new ActionRowBuilder()
-
-                .addComponents(hora)
-
+                    .addComponents(hora)
 
             );
 
@@ -116,7 +161,6 @@ export default {
 
 
         }
-
 
 
     }
