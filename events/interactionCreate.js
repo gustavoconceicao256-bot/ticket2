@@ -1,9 +1,9 @@
 import abrirTicket from "../selectMenus/abrirTicket.js";
-import testeTatico from "../Modais/testeTatico.js";
+import testeTatico from "../modals/testeTatico.js";
 
-import aceitarTeste from "../Botões/aceitarTeste.js";
-import recusarTeste from "../Botões/recusarTeste.js";
-import finalizarTicket from "../Botões/finalizarTicket.js";
+import aceitarTeste from "../buttons/aceitarTeste.js";
+import recusarTeste from "../buttons/recusarTeste.js";
+import finalizarTicket from "../buttons/finalizarTicket.js";
 
 
 export default {
