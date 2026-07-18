@@ -1,75 +1,117 @@
-import { EmbedBuilder } from "discord.js";
+import {
+    EmbedBuilder
+} from "discord.js";
+
 import config from "../config/config.js";
+
 
 export default {
 
-    customId: "sairTicket",
 
-    async execute(interaction) {
+    customId:"sairTicket",
+
+
+    async execute(interaction){
+
 
         const canal = interaction.channel;
 
         const usuario = interaction.user;
 
-        const log = interaction.guild.channels.cache.get(
-            config.canais.logs
-        );
+
+
+        const log =
+            interaction.guild.channels.cache.get(
+                config.canais.logs
+            );
+
+
 
 
         const embed = new EmbedBuilder()
 
+
             .setColor("#EF4444")
+
+
+            .setAuthor({
+
+                name:usuario.username,
+
+                iconURL:usuario.displayAvatarURL({
+
+                    dynamic:true,
+                    size:1024
+
+                })
+
+            })
+
 
             .setTitle("🚪 TICKET CANCELADO")
 
+
             .setDescription(
-`👤 **Cancelado por:**
-${usuario}
+`👤 **Cancelado pelo usuário:**
+<@${usuario.id}>
 
 📂 **Canal:**
 \`${canal.name}\`
 
-📅 **Data:**
-<t:${Math.floor(Date.now() / 1000)}:f>
-
 ━━━━━━━━━━━━━━
 
-O usuário cancelou o próprio atendimento.`
+O usuário abriu o ticket por engano ou desistiu do atendimento.`
             )
+
 
             .setThumbnail(
+
                 usuario.displayAvatarURL({
+
                     dynamic:true,
                     size:1024
+
                 })
+
             )
 
+
             .setFooter({
-                text:"GTT • Sistema de Atendimento",
-                iconURL: config.visual.thumbnail
+
+                text:"GTT • Sistema Oficial",
+
+                iconURL:config.visual.thumbnail
+
             })
 
+
             .setTimestamp();
+
 
 
 
         if(log){
 
             await log.send({
+
                 embeds:[embed]
+
             });
 
         }
 
 
 
+
         await interaction.reply({
 
-            content:"🚪 Atendimento cancelado. O ticket será fechado.",
+            content:"🚪 Ticket cancelado. O canal será fechado.",
 
             ephemeral:true
 
         });
+
+
 
 
 
@@ -80,6 +122,8 @@ O usuário cancelou o próprio atendimento.`
         },3000);
 
 
+
     }
+
 
 };
