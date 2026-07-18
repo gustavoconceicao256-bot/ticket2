@@ -1,9 +1,11 @@
 export default {
-    name: "clientReady",
+
+    name: "ready",
 
     once: true,
 
     execute(client) {
+
         console.clear();
 
         console.log("==============================");
@@ -11,5 +13,7 @@ export default {
         console.log(`👤 ${client.user.tag}`);
         console.log(`🆔 ${client.user.id}`);
         console.log("==============================");
+
     }
+
 };
