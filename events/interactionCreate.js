@@ -11,31 +11,25 @@ export default {
 
     name: "interactionCreate",
 
-
     async execute(interaction) {
 
 
         // COMANDOS SLASH
-
         if (interaction.isChatInputCommand()) {
-
 
             const comando = interaction.client.commands.get(
                 interaction.commandName
             );
-
 
             if (!comando) return;
 
 
             try {
 
-
                 await comando.execute(interaction);
 
 
             } catch (error) {
-
 
                 console.error(
                     "Erro ao executar comando:",
@@ -44,7 +38,6 @@ export default {
 
 
                 if (interaction.replied || interaction.deferred) {
-
 
                     await interaction.followUp({
 
@@ -56,7 +49,6 @@ export default {
 
                 } else {
 
-
                     await interaction.reply({
 
                         content: "❌ Erro ao executar o comando.",
@@ -64,15 +56,12 @@ export default {
 
                     });
 
-
                 }
-
 
             }
 
 
             return;
-
 
         }
 
@@ -81,15 +70,12 @@ export default {
 
 
         // MENU SELECT
-
         if (interaction.isStringSelectMenu()) {
 
 
             if (interaction.customId === "abrirTicket") {
 
-
                 return abrirTicket.execute(interaction);
-
 
             }
 
@@ -101,15 +87,12 @@ export default {
 
 
         // MODAL
-
         if (interaction.isModalSubmit()) {
 
 
             if (interaction.customId === "testeTatico") {
 
-
                 return testeTatico.execute(interaction);
-
 
             }
 
@@ -120,18 +103,13 @@ export default {
 
 
 
-
         // BOTÕES
-
         if (interaction.isButton()) {
-
 
 
             if (interaction.customId.startsWith("aceitarTeste_")) {
 
-
                 return aceitarTeste.execute(interaction);
-
 
             }
 
@@ -139,31 +117,23 @@ export default {
 
             if (interaction.customId.startsWith("recusarTeste_")) {
 
-
                 return recusarTeste.execute(interaction);
 
-
             }
-
 
 
 
             if (interaction.customId === "finalizarTicket") {
 
-
                 return finalizarTicket.execute(interaction);
-
 
             }
 
 
 
-
             if (interaction.customId === "sairTicket") {
 
-
                 return sairTicket.execute(interaction);
-
 
             }
 
