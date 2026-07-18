@@ -57,7 +57,6 @@ export default async function criarTicket(interaction, categoria) {
 
         permissionOverwrites: [
 
-
             {
 
                 id: interaction.guild.id,
@@ -107,8 +106,6 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
-
-
     const embed = new EmbedBuilder()
 
 
@@ -125,41 +122,27 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
-        .setTitle("🎫 Atendimento Iniciado")
+        .setTitle("🎫 Atendimento Aberto")
 
 
 
         .setDescription(`
 
 👤 **Usuário**
-
 ${interaction.user}
 
 
-
 📂 **Categoria**
-
 \`${categoria.toUpperCase()}\`
 
 
-
-━━━━━━━━━━━━━━━━━━
-
+━━━━━━━━━━━━━━━━
 
 
-🛡️ A equipe da **GTT** foi notificada.
+🛡️ Aguarde a equipe **GTT** atender seu chamado.
 
 
-
-Aguarde um membro responsável pelo atendimento.
-
-
-
-━━━━━━━━━━━━━━━━━━
-
-
-
-⚡ Atendimento Privado • GTT
+⚡ Atendimento Privado
 
 `)
 
@@ -200,7 +183,9 @@ Aguarde um membro responsável pelo atendimento.
     const botoes = new ActionRowBuilder()
 
 
+
         .addComponents(
+
 
 
             new ButtonBuilder()
@@ -244,6 +229,7 @@ Aguarde um membro responsável pelo atendimento.
         components: [botoes]
 
     });
+
 
 
 
