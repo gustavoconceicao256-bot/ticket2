@@ -46,7 +46,7 @@ export default {
 
 
 
-        const embed = new EmbedBuilder()
+        const embedPainel = new EmbedBuilder()
 
             .setTitle("📋 Teste Tático Recusado 🔴")
 
@@ -64,13 +64,13 @@ ${hora}
 ${interaction.user}`
             )
 
-            .setColor("Red");
+            .setColor("#EF4444");
 
 
 
         await interaction.update({
 
-            embeds: [embed],
+            embeds: [embedPainel],
 
             components: []
 
@@ -78,11 +78,85 @@ ${interaction.user}`
 
 
 
-        await usuario.send(
-`❌ Sua solicitação de Teste Tático foi recusada.
+        const pv = new EmbedBuilder()
 
-Para mais informações, abra um ticket de Dúvidas ou procure um responsável pela área.`
-        ).catch(() => {});
+            .setColor("#EF4444")
+
+            .setAuthor({
+
+                name:"GTT • CENTRAL DE TESTE TÁTICO",
+
+                iconURL:config.visual.thumbnail
+
+            })
+
+
+            .setTitle("❌ Teste Tático Recusado")
+
+
+            .setDescription(`
+
+👤 **Solicitante**
+<@${usuarioId}>
+
+
+📅 **Data**
+${data}
+
+
+🕒 **Hora**
+${hora}
+
+
+👮 **Responsável**
+${interaction.user}
+
+
+━━━━━━━━━━━━━━
+
+
+Sua solicitação de **Teste Tático** foi recusada pela equipe **GTT**.
+
+
+Caso tenha dúvidas, abra um ticket no suporte.
+
+
+⚡ Sistema Oficial GTT
+
+`)
+
+
+            .setThumbnail(
+
+                usuario.displayAvatarURL({
+
+                    dynamic:true,
+
+                    size:1024
+
+                })
+
+            )
+
+
+            .setFooter({
+
+                text:"GTT • Atendimento Privado",
+
+                iconURL:config.visual.thumbnail
+
+            })
+
+
+            .setTimestamp();
+
+
+
+        await usuario.send({
+
+            embeds:[pv]
+
+        }).catch(()=>{});
 
 
     }
