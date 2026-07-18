@@ -5,85 +5,91 @@ import {
     StringSelectMenuBuilder
 } from "discord.js";
 
+import config from "../config/config.js";
 
 export default {
 
     data: new SlashCommandBuilder()
-
         .setName("painel")
-
         .setDescription("Abrir painel de atendimento"),
-
-
 
     name: "painel",
 
-
-
     async execute(interaction) {
-
 
         const embed = new EmbedBuilder()
 
-            .setTitle("📋 Central de Atendimento")
+            .setColor(config.visual.color)
 
-            .setDescription(
-`Selecione uma opção abaixo:
+            .setAuthor({
+                name: "👑 GTT • Sistema de Atendimento",
+                iconURL: config.visual.thumbnail
+            })
 
-🚨 **Denunciar**
-Crie uma denúncia para a equipe responsável.
+            .setTitle("🎫 CENTRAL DE ATENDIMENTO")
+
+            .setDescription(`
+
+Bem-vindo ao sistema oficial de atendimento da **GTT**.
+
+Selecione uma categoria abaixo para abrir um ticket com nossa equipe.
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+🚨 **Denúncias**
+Reporte qualquer ocorrência.
 
 ❓ **Dúvidas**
-Abra um atendimento para tirar dúvidas.
+Converse com nossa equipe.
 
-🪖 **Solicitar Teste Tático**
-Solicite um horário para realizar seu teste.`
-            )
+🪖 **Teste Tático**
+Solicite seu teste.
 
-            .setColor("Red");
+━━━━━━━━━━━━━━━━━━━━━━
 
+> Escolha uma opção no menu abaixo.
 
+`)
+
+            .setThumbnail(config.visual.thumbnail)
+
+            .setImage(config.visual.banner)
+
+            .setFooter(config.visual.footer)
+
+            .setTimestamp();
 
         const menu = new StringSelectMenuBuilder()
 
             .setCustomId("abrirTicket")
 
-            .setPlaceholder("Selecione uma opção...")
+            .setPlaceholder("📂 Selecione uma categoria")
 
             .addOptions(
 
                 {
-                    label: "Denunciar",
+                    label: "🚨 Denunciar",
                     description: "Abrir uma denúncia",
-                    emoji: "🚨",
                     value: "denuncia"
                 },
 
-
                 {
-                    label: "Dúvidas",
-                    description: "Abrir um atendimento",
-                    emoji: "❓",
+                    label: "❓ Dúvidas",
+                    description: "Falar com nossa equipe",
                     value: "duvidas"
                 },
 
-
                 {
-                    label: "Solicitar Teste Tático",
-                    description: "Solicitar um teste",
-                    emoji: "🪖",
+                    label: "🪖 Solicitar Teste Tático",
+                    description: "Agendar um teste",
                     value: "teste_tatico"
                 }
 
             );
 
-
-
         const row = new ActionRowBuilder()
 
             .addComponents(menu);
-
-
 
         await interaction.reply({
 
@@ -92,7 +98,6 @@ Solicite um horário para realizar seu teste.`
             components: [row]
 
         });
-
 
     }
 
