@@ -2,26 +2,26 @@ const config = {
 
     canais: {
 
-        // Canal onde aparecem as solicitações de Teste Tático
+        // Canal onde aparecem os Testes Táticos
         solicitacoesTeste: "1523401108007944343",
 
-        // Categoria ou canal onde serão criados os tickets
+        // Canal onde ficam os tickets
         tickets: "1524497169632071800",
 
-        // Canal de logs
+        // Canal onde ficam os logs
         logs: "1527755533388611594"
 
     },
 
     cargos: {
 
-        // Cargos que podem aprovar/recusar Teste Tático
+        // Cargos que podem aceitar ou recusar Teste Tático
         testeTatico: [
             "1460499655640092780",
             "1522793484036083812"
         ],
 
-        // Cargos que podem fechar tickets
+        // Cargos que podem finalizar atendimento
         finalizarTicket: [
             "1521984073969569883",
             "1522086542716305548",
@@ -34,19 +34,15 @@ const config = {
 
     visual: {
 
-        // Cor principal dos embeds
         color: "#6D28D9",
 
-        // GIF pequeno (canto superior direito)
-        thumbnail: "COLE_AQUI_O_LINK_DO_GIF",
+        thumbnail: "https://cdn.discordapp.com/attachments/1522051042345357483/1527233920762908774/lv_0_20260716054352.gif?ex=6a5b3c6d&is=6a59eaed&hm=c359856177ec827dbc178b656618a74d190029419fdfbcbb2fc6606649fd90de&",
 
-        // GIF grande (banner inferior)
-        banner: "COLE_AQUI_O_LINK_DO_BANNER_GIF",
+        banner: "https://cdn.discordapp.com/attachments/1522051042345357483/1527231255475785808/lv_0_20260716053044.gif?ex=6a5b39f1&is=6a59e871&hm=e82c666fdeb160c250659832727103e98fc8539c95ea0b064edc0fd407f51b85&",
 
-        // Rodapé padrão
         footer: {
             text: "👑 GTT • Sistema Oficial",
-            iconURL: "COLE_AQUI_O_LINK_DO_GIF"
+            iconURL: "https://cdn.discordapp.com/attachments/1522051042345357483/1527233920762908774/lv_0_20260716054352.gif?ex=6a5b3c6d&is=6a59eaed&hm=c359856177ec827dbc178b656618a74d190029419fdfbcbb2fc6606649fd90de&"
         }
 
     }
