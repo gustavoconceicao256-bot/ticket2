@@ -37,7 +37,7 @@ export default {
 
         const usuarioId = dados[1];
         const data = dados[2];
-        aconst hora = dados[3];
+        const hora = dados[3];
 
 
 
