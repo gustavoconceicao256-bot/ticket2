@@ -7,13 +7,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 
-
 export default async function commandHandler(client) {
 
 
-    const comandosPath = path.resolve(
-        process.cwd(),
-        "Comandos"
+    const comandosPath = path.join(
+        __dirname,
+        "../Comandos"
     );
 
 
@@ -29,10 +28,8 @@ export default async function commandHandler(client) {
     }
 
 
-
     const arquivos = fs.readdirSync(comandosPath)
         .filter(file => file.endsWith(".js"));
-
 
 
     for (const arquivo of arquivos) {
@@ -43,23 +40,21 @@ export default async function commandHandler(client) {
         );
 
 
-
         if (comando.default) {
 
 
             client.commands.set(
-                comando.default.name,
+                comando.default.data.name,
                 comando.default
             );
 
 
             console.log(
-                `✅ Comando carregado: ${comando.default.name}`
+                `✅ Comando carregado: ${comando.default.data.name}`
             );
 
 
         }
-
 
     }
 
