@@ -1,9 +1,9 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 
-import commandHandler from "./condutores/commandHandler.js";
-import eventHandler from "./condutores/eventHandler.js";
-import registrarComandos from "./condutores/registrarComandos.js";
+import commandHandler from "./handlers/commandHandler.js";
+import eventHandler from "./handlers/eventHandler.js";
+import registrarComandos from "./handlers/registrarComandos.js";
 
 import keepAlive from "./utils/keepAlive.js";
 
@@ -20,6 +20,9 @@ const client = new Client({
     ]
 
 });
+
+
+client.commands = new Map();
 
 
 keepAlive();
