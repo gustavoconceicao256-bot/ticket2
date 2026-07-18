@@ -16,8 +16,9 @@ export default async function registrarComandos(client) {
 
 
     const commandsPath = path.join(
-        __dirname,
-        "../Comandos"
+    __dirname,
+    "../commands"
+);
     );
 
 
@@ -40,7 +41,7 @@ export default async function registrarComandos(client) {
 
 
         const command = await import(
-            `../Comandos/${file}`
+    `../Comandos/${file}`
         );
 
 
