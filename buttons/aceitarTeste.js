@@ -1,16 +1,11 @@
-import {
-    EmbedBuilder
-} from "discord.js";
-
+import { EmbedBuilder } from "discord.js";
 import config from "../config/config.js";
-
 
 export default {
 
     customId: "aceitarTeste",
 
     async execute(interaction) {
-
 
         const temPermissao = interaction.member.roles.cache.some(role =>
             config.cargos.testeTatico.includes(role.id)
@@ -20,73 +15,30 @@ export default {
         if (!temPermissao) {
 
             return interaction.reply({
-
                 content: "❌ Você não tem permissão para aceitar Teste Tático.",
-
                 ephemeral: true
-
             });
 
         }
 
 
-
         const dados = interaction.customId.split("_");
-
 
         const usuarioId = dados[1];
         const data = dados[2];
         const hora = dados[3];
 
 
-
-        const usuario =
-            await interaction.client.users.fetch(usuarioId);
+        const usuario = await interaction.client.users.fetch(usuarioId);
 
 
-
-        const embedPainel = new EmbedBuilder()
-
-            .setTitle("📋 Teste Tático Aceito 🟢")
-
-            .setDescription(
-`👤 **Solicitante:**
-<@${usuarioId}>
-
-📅 **Data:**
-${data}
-
-🕒 **Hora:**
-${hora}
-
-👮 **Aceito por:**
-${interaction.user}`
-            )
-
-            .setColor("#22C55E");
-
-
-
-        await interaction.update({
-
-            embeds: [embedPainel],
-
-            components: []
-
-        });
-
-
-
-        const pv = new EmbedBuilder()
+        const embed = new EmbedBuilder()
 
             .setColor("#22C55E")
 
             .setAuthor({
-
                 name: "GTT • CENTRAL DE TESTE TÁTICO",
-
                 iconURL: config.visual.thumbnail
-
             })
 
             .setTitle("✅ Teste Tático Aprovado")
@@ -96,27 +48,20 @@ ${interaction.user}`
 👤 **Solicitante**
 <@${usuarioId}>
 
-
 📅 **Data**
 ${data}
-
 
 🕒 **Hora**
 ${hora}
 
-
 👮 **Responsável**
 ${interaction.user}
 
-
 ━━━━━━━━━━━━━━
-
 
 Sua solicitação de **Teste Tático** foi aprovada pela equipe **GTT**.
 
-
 Compareça no horário informado.
-
 
 ⚡ Sistema Oficial GTT
 
@@ -130,166 +75,22 @@ Compareça no horário informado.
             )
 
             .setFooter({
-
                 text: "GTT • Atendimento Privado",
-
                 iconURL: config.visual.thumbnail
-
             })
 
             .setTimestamp();
 
 
-
         await usuario.send({
-
-            embeds: [pv]
-
+            embeds: [embed]
         }).catch(() => {});
 
 
-    }
-
-};
-        const usuarioId = dados[1];
-        const data = dados[2];
-        const hora = dados[3];
-
-
-
-        const usuario =
-            await interaction.client.users.fetch(usuarioId);
-
-
-
-        const embedPainel = new EmbedBuilder()
-
-            .setTitle("📋 Teste Tático Aceito 🟢")
-
-            .setDescription(
-`👤 **Solicitante:**
-<@${usuarioId}>
-
-📅 **Data:**
-${data}
-
-🕒 **Hora:**
-${hora}
-
-👮 **Aceito por:**
-${interaction.user}`
-            )
-
-            .setColor("#22C55E");
-
-
-
-        await interaction.update({
-
-            embeds: [embedPainel],
-
-            components: []
-
-        });
-
-
-
-        const pv = new EmbedBuilder()
+        const painel = new EmbedBuilder()
 
             .setColor("#22C55E")
 
-            .setAuthor({
-
-                name:"GTT • CENTRAL DE TESTE TÁTICO",
-
-                iconURL:config.visual.thumbnail
-
-            })
-
-
-            .setTitle("✅ Teste Tático Aprovado")
-
-
-            .setDescription(`
-
-👤 **Solicitante**
-<@${usuarioId}>
-
-
-📅 **Data**
-${data}
-
-
-🕒 **Hora**
-${hora}
-
-
-👮 **Responsável**
-${interaction.user}
-
-
-━━━━━━━━━━━━━━
-
-
-Sua solicitação de **Teste Tático** foi aprovada pela equipe **GTT**.
-
-
-Compareça no horário informado.
-
-
-⚡ Sistema Oficial GTT
-
-`)
-
-
-            .setThumbnail(
-
-                usuario.displayAvatarURL({
-
-                    dynamic:true,
-
-                    size:1024
-
-                })
-
-            )
-
-
-            .setFooter({
-
-                text:"GTT • Atendimento Privado",
-
-                iconURL:config.visual.thumbnail
-
-            })
-
-
-            .setTimestamp();
-
-
-
-        await usuario.send({
-
-            embeds:[pv]
-
-        }).catch(()=>{});
-
-
-    }
-
-};        const usuarioId = dados[1];
-        const data = dados[2];
-        const hora = dados[3];
-
-
-
-        const usuario =
-            await interaction.client.users.fetch(usuarioId);
-
-
-
-        const embed = new EmbedBuilder()
-
             .setTitle("📋 Teste Tático Aceito 🟢")
 
             .setDescription(
@@ -304,31 +105,16 @@ ${hora}
 
 👮 **Aceito por:**
 ${interaction.user}`
-            )
-
-            .setColor("Green");
-
+            );
 
 
         await interaction.update({
 
-            embeds: [embed],
+            embeds: [painel],
 
             components: []
 
         });
-
-
-
-        await usuario.send(
-`✅ Sua solicitação de Teste Tático foi aceita.
-
-📅 Data: ${data}
-
-🕒 Hora: ${hora}
-
-Compareça no horário informado.`
-        ).catch(() => {});
 
 
     }
