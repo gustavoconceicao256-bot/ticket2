@@ -34,11 +34,12 @@ export default async function criarTicket(interaction, categoria) {
 
         return interaction.editReply({
 
-            content: "❌ Você já possui um atendimento aberto."
+            content: "⚠️ Você já possui um atendimento aberto."
 
         });
 
     }
+
 
 
 
@@ -50,29 +51,36 @@ export default async function criarTicket(interaction, categoria) {
 
         parent: config.canais.tickets,
 
-        // Guarda quem abriu o ticket para logs e fechamento
+
         topic: interaction.user.id,
 
 
         permissionOverwrites: [
 
+
             {
+
                 id: interaction.guild.id,
 
                 deny: [
                     PermissionFlagsBits.ViewChannel
                 ]
+
             },
 
 
             {
+
                 id: interaction.user.id,
 
                 allow: [
+
                     PermissionFlagsBits.ViewChannel,
                     PermissionFlagsBits.SendMessages,
                     PermissionFlagsBits.ReadMessageHistory
+
                 ]
+
             },
 
 
@@ -81,12 +89,15 @@ export default async function criarTicket(interaction, categoria) {
                 id: cargo,
 
                 allow: [
+
                     PermissionFlagsBits.ViewChannel,
                     PermissionFlagsBits.SendMessages,
                     PermissionFlagsBits.ReadMessageHistory
+
                 ]
 
             }))
+
 
         ]
 
@@ -96,7 +107,10 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
+
+
     const embed = new EmbedBuilder()
+
 
         .setColor("#7C3AED")
 
@@ -105,36 +119,50 @@ export default async function criarTicket(interaction, categoria) {
 
             name: "GTT • CENTRAL DE ATENDIMENTO",
 
-            iconURL: interaction.user.displayAvatarURL({
-
-                dynamic: true,
-
-                size: 1024
-
-            })
+            iconURL: config.visual.thumbnail
 
         })
 
 
-        .setTitle("🎫 Atendimento")
+
+        .setTitle("🎫 Atendimento Iniciado")
+
 
 
         .setDescription(`
 
 👤 **Usuário**
+
 ${interaction.user}
 
 
+
 📂 **Categoria**
+
 \`${categoria.toUpperCase()}\`
+
 
 
 ━━━━━━━━━━━━━━━━━━
 
 
-🛡️ Aguarde um membro da equipe GTT.
+
+🛡️ A equipe da **GTT** foi notificada.
+
+
+
+Aguarde um membro responsável pelo atendimento.
+
+
+
+━━━━━━━━━━━━━━━━━━
+
+
+
+⚡ Atendimento Privado • GTT
 
 `)
+
 
 
         .setThumbnail(
@@ -150,13 +178,15 @@ ${interaction.user}
         )
 
 
+
         .setFooter({
 
-            text: "GTT • Atendimento Privado",
+            text: "GTT • Sistema Oficial",
 
             iconURL: config.visual.thumbnail
 
         })
+
 
 
         .setTimestamp();
@@ -166,10 +196,11 @@ ${interaction.user}
 
 
 
+
     const botoes = new ActionRowBuilder()
 
-        .addComponents(
 
+        .addComponents(
 
 
             new ButtonBuilder()
@@ -184,7 +215,6 @@ ${interaction.user}
 
 
 
-
             new ButtonBuilder()
 
                 .setCustomId("finalizarTicket")
@@ -195,7 +225,10 @@ ${interaction.user}
 
                 .setStyle(ButtonStyle.Success)
 
+
         );
+
+
 
 
 
