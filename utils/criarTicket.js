@@ -43,7 +43,6 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
-
     const canal = await interaction.guild.channels.create({
 
         name: nomeCanal,
@@ -53,10 +52,12 @@ export default async function criarTicket(interaction, categoria) {
         parent: config.canais.tickets,
 
 
+        // guarda quem abriu para logs
         topic: interaction.user.id,
 
 
         permissionOverwrites: [
+
 
             {
 
@@ -98,11 +99,9 @@ export default async function criarTicket(interaction, categoria) {
 
             }))
 
-
         ]
 
     });
-
 
 
 
@@ -123,9 +122,7 @@ export default async function criarTicket(interaction, categoria) {
         })
 
 
-
         .setTitle("🎫 Atendimento Aberto")
-
 
 
         .setDescription(`
@@ -133,14 +130,18 @@ export default async function criarTicket(interaction, categoria) {
 👤 **Usuário**
 ${interaction.user}
 
+
 📂 **Categoria**
 \`${categoria.toUpperCase()}\`
 
-━━━━━━━━━━━━━━━━
 
-🛡️ Aguarde a equipe **GTT** atender seu chamado.
+━━━━━━━━━━━━━━
 
-⚡ Atendimento Privado • GTT
+
+🛡️ Aguarde um membro da equipe **GTT**.
+
+
+⚡ Atendimento Privado
 
 `)
 
@@ -150,24 +151,22 @@ ${interaction.user}
 
             interaction.user.displayAvatarURL({
 
-                dynamic: true,
+                dynamic:true,
 
-                size: 1024
+                size:1024
 
             })
 
         )
 
 
-
         .setFooter({
 
-            text: "GTT • Sistema Oficial",
+            text:"GTT • Sistema Oficial",
 
-            iconURL: config.visual.thumbnail
+            iconURL:config.visual.thumbnail
 
         })
-
 
 
         .setTimestamp();
@@ -181,7 +180,6 @@ ${interaction.user}
     const botoes = new ActionRowBuilder()
 
 
-
         .addComponents(
 
 
@@ -190,12 +188,11 @@ ${interaction.user}
 
                 .setCustomId("sairTicket")
 
-                .setLabel("Sair do Ticket")
+                .setLabel("Cancelar Ticket")
 
                 .setEmoji("🚪")
 
                 .setStyle(ButtonStyle.Danger),
-
 
 
 
@@ -205,7 +202,7 @@ ${interaction.user}
 
                 .setLabel("Finalizar Ticket")
 
-                .setEmoji("✅")
+                .setEmoji("🔒")
 
                 .setStyle(ButtonStyle.Success)
 
@@ -218,23 +215,15 @@ ${interaction.user}
 
 
 
-
-
     await canal.send({
 
+        content:`${interaction.user}`,
 
-        content: `${interaction.user}`,
+        embeds:[embed],
 
-
-        embeds: [embed],
-
-
-        components: [botoes]
-
+        components:[botoes]
 
     });
-
-
 
 
 
@@ -243,12 +232,9 @@ ${interaction.user}
 
     await interaction.editReply({
 
-
-        content: `✅ Atendimento criado com sucesso: ${canal}`
-
+        content:`✅ Atendimento criado: ${canal}`
 
     });
-
 
 
 }
