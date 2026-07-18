@@ -1,20 +1,37 @@
-import fs from "fs";
-import path from "path";
-import { fileURLToPath } from "url";
+import { Client, GatewayIntentBits } from "discord.js";
+import dotenv from "dotenv";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import commandHandler from "./handlers/commandHandler.js";
+import eventHandler from "./handlers/eventHandler.js";
+import registrarComandos from "./handlers/registrarComandos.js";
 
-console.log("📁 Pasta atual:", __dirname);
+import keepAlive from "./utils/keepAlive.js";
 
-console.log("📂 Arquivos na raiz:");
-console.log(fs.readdirSync(__dirname));
+dotenv.config();
 
-const condutores = path.join(__dirname, "Condutores");
+const client = new Client({
+    intents: [
+        GatewayIntentBits.Guilds,
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildMessages,
+        GatewayIntentBits.MessageContent
+    ]
+});
 
-console.log("📂 Condutores existe?", fs.existsSync(condutores));
+keepAlive();
 
-if (fs.existsSync(condutores)) {
-    console.log("📄 Arquivos dentro de Condutores:");
-    console.log(fs.readdirSync(condutores));
-}
+console.log("🚀 Iniciando bot...");
+
+await commandHandler(client);
+
+await registrarComandos(client);
+
+await eventHandler(client);
+
+client.login(process.env.TOKEN)
+    .then(() => {
+        console.log(`🤖 Bot conectado como ${client.user.tag}`);
+    })
+    .catch((error) => {
+        console.error("❌ Erro ao conectar o bot:", error);
+    });
