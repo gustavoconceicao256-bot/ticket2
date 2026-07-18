@@ -50,6 +50,9 @@ export default async function criarTicket(interaction, categoria) {
 
         parent: config.canais.tickets,
 
+        // Guarda quem abriu o ticket para logs e fechamento
+        topic: interaction.user.id,
+
 
         permissionOverwrites: [
 
@@ -88,6 +91,7 @@ export default async function criarTicket(interaction, categoria) {
         ]
 
     });
+
 
 
 
@@ -167,6 +171,7 @@ ${interaction.user}
         .addComponents(
 
 
+
             new ButtonBuilder()
 
                 .setCustomId("sairTicket")
@@ -176,6 +181,7 @@ ${interaction.user}
                 .setEmoji("🚪")
 
                 .setStyle(ButtonStyle.Danger),
+
 
 
 
