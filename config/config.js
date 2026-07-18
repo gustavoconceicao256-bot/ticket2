@@ -5,10 +5,13 @@ const config = {
 
     canais: {
 
+        // Canal onde chegam os Testes Táticos
         solicitacoesTeste: "1523401108007944343",
 
-        tickets: "1524497169632071800",
+        // Categoria onde os tickets privados serão criados
+        tickets: "1527871271352795267",
 
+        // Canal de logs
         logs: "1527755533388611594"
 
     },
@@ -16,12 +19,14 @@ const config = {
 
     cargos: {
 
+        // Cargos que podem aceitar ou recusar Teste Tático
         testeTatico: [
             "1460499655640092780",
             "1522793484036083812"
         ],
 
 
+        // Cargos que podem atender e finalizar tickets
         finalizarTicket: [
             "1521984073969569883",
             "1522086542716305548",
