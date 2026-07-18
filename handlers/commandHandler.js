@@ -62,4 +62,4 @@ export default async function commandHandler(client) {
     console.log("✅ Comandos carregados.");
 
 }
-// atualização
+// atualização.
