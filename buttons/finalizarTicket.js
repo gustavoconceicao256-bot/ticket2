@@ -3,6 +3,7 @@ import {
 } from "discord.js";
 
 import config from "../config/config.js";
+
 import dataHora from "../utils/dataHora.js";
 
 
@@ -23,9 +24,9 @@ export default {
 
             return interaction.reply({
 
-                content:"❌ Você não tem permissão para finalizar este atendimento.",
+                content: "❌ Você não tem permissão para finalizar este atendimento.",
 
-                ephemeral:true
+                ephemeral: true
 
             });
 
@@ -34,6 +35,7 @@ export default {
 
 
         const canal = interaction.channel;
+
 
         const usuarioId = canal.topic;
 
@@ -48,6 +50,8 @@ export default {
 
 
 
+        // LOG
+
         const embedLog = new EmbedBuilder()
 
 
@@ -56,53 +60,55 @@ export default {
 
             .setAuthor({
 
-                name:`${interaction.user.username}`,
+                name:"GTT • SISTEMA DE LOGS",
 
-                iconURL:interaction.user.displayAvatarURL({
-
-                    dynamic:true,
-                    size:1024
-
-                })
+                iconURL:config.visual.thumbnail
 
             })
 
 
-            .setTitle("🔒 TICKET FINALIZADO")
+            .setTitle("🔒 Ticket Finalizado")
 
 
-            .setDescription(
-`👤 **Aberto por:**
-${usuario ? `<@${usuario.id}>` : "Não identificado"}
+            .setDescription(`
 
-🛡️ **Finalizado por:**
-<@${interaction.user.id}>
+👤 **Aberto por**
+${usuario ? usuario : "Não identificado"}
 
-📂 **Categoria:**
+
+👮 **Finalizado por**
+${interaction.user}
+
+
+📂 **Categoria**
 \`${canal.name.includes("denuncia") ? "DENÚNCIA" : "SUPORTE"}\`
+
+
+📅 ${agora.data} • ${agora.hora}
+
 
 ━━━━━━━━━━━━━━
 
-📅 ${agora.data}
-🕒 ${agora.hora}`
-            )
+⚡ GTT • Sistema Oficial
+
+`)
 
 
             .setThumbnail(
 
-                interaction.user.displayAvatarURL({
-
+                usuario
+                ? usuario.displayAvatarURL({
                     dynamic:true,
                     size:1024
-
                 })
+                : config.visual.thumbnail
 
             )
 
 
             .setFooter({
 
-                text:"GTT • Sistema Oficial",
+                text:"GTT • Logs",
 
                 iconURL:config.visual.thumbnail
 
@@ -114,10 +120,9 @@ ${usuario ? `<@${usuario.id}>` : "Não identificado"}
 
 
 
-        const canalLog =
-            interaction.guild.channels.cache.get(
-                config.canais.logs
-            );
+        const canalLog = interaction.guild.channels.cache.get(
+            config.canais.logs
+        );
 
 
 
@@ -136,7 +141,9 @@ ${usuario ? `<@${usuario.id}>` : "Não identificado"}
 
 
 
+
         // PV DO USUÁRIO
+
 
         if(usuario){
 
@@ -144,38 +151,44 @@ ${usuario ? `<@${usuario.id}>` : "Não identificado"}
             const pv = new EmbedBuilder()
 
 
-                .setColor("#22C55E")
+                .setColor("#7C3AED")
 
 
                 .setAuthor({
 
-                    name:"GTT • Atendimento",
+                    name:"GTT • CENTRAL DE ATENDIMENTO",
 
                     iconURL:config.visual.thumbnail
 
                 })
 
 
-                .setTitle("✅ Atendimento Finalizado")
+                .setTitle("🔒 Atendimento Encerrado")
 
 
-                .setDescription(
-`Seu atendimento foi encerrado.
+                .setDescription(`
+
+👤 **Usuário**
+${usuario}
 
 
-📂 **Categoria:**
+📂 **Categoria**
 \`${canal.name.includes("denuncia") ? "DENÚNCIA" : "SUPORTE"}\`
 
-🛡️ **Responsável:**
-<@${interaction.user.id}>
 
+👮 **Responsável**
+${interaction.user}
 
-Obrigado por utilizar o sistema da **GTT**.
 
 ━━━━━━━━━━━━━━
 
-⚡ Sistema Oficial`
-                )
+
+Seu atendimento foi encerrado pela equipe **GTT**.
+
+
+⚡ Sistema Oficial GTT
+
+`)
 
 
                 .setThumbnail(
@@ -183,6 +196,7 @@ Obrigado por utilizar o sistema da **GTT**.
                     usuario.displayAvatarURL({
 
                         dynamic:true,
+
                         size:1024
 
                     })
@@ -192,7 +206,7 @@ Obrigado por utilizar o sistema da **GTT**.
 
                 .setFooter({
 
-                    text:"GTT • Atendimento",
+                    text:"GTT • Atendimento Privado",
 
                     iconURL:config.visual.thumbnail
 
@@ -216,6 +230,7 @@ Obrigado por utilizar o sistema da **GTT**.
 
 
 
+
         await interaction.reply({
 
             content:"🔒 Atendimento finalizado. O canal será fechado.",
@@ -223,6 +238,7 @@ Obrigado por utilizar o sistema da **GTT**.
             ephemeral:true
 
         });
+
 
 
 
