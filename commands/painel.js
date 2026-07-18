@@ -5,105 +5,175 @@ import {
     StringSelectMenuBuilder
 } from "discord.js";
 
+
 import config from "../config/config.js";
+
 
 export default {
 
+
     data: new SlashCommandBuilder()
+
         .setName("painel")
+
         .setDescription("Abrir painel de atendimento"),
+
 
     name: "painel",
 
+
+
     async execute(interaction) {
+
 
         const embed = new EmbedBuilder()
 
+
             .setColor(config.visual.color)
 
+
             .setAuthor({
-                name: "👑 GTT • Sistema Oficial",
+
+                name: "GTT • SISTEMA OFICIAL",
+
                 iconURL: config.visual.thumbnail
+
             })
+
 
             .setTitle("🎫 CENTRAL DE ATENDIMENTO")
 
+
+
             .setDescription(`
 
-Bem-vindo ao sistema oficial da **GTT**.
+> Bem-vindo ao sistema oficial da **GTT**.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
 🚨 **DENÚNCIAS**
 
-Reporte qualquer jogador ou membro.
+Reporte jogadores, situações ou problemas.
+
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-❓ **DÚVIDAS**
 
-Abra um atendimento com nossa equipe.
+❓ **SUPORTE**
 
-━━━━━━━━━━━━━━━━━━━━━━
+Tire dúvidas e solicite ajuda da equipe.
 
-🪖 **TESTE TÁTICO**
-
-Solicite seu horário para realizar o teste.
 
 ━━━━━━━━━━━━━━━━━━━━━━
 
-> Escolha uma categoria no menu abaixo.
+
+📋 **TESTE TÁTICO**
+
+Solicite sua avaliação para entrar na equipe.
+
+
+━━━━━━━━━━━━━━━━━━━━━━
+
+
+📂 Escolha uma categoria abaixo para iniciar.
 
 `)
 
+
+
             .setThumbnail(config.visual.thumbnail)
+
 
             .setImage(config.visual.banner)
 
+
             .setFooter(config.visual.footer)
+
 
             .setTimestamp();
 
+
+
         const menu = new StringSelectMenuBuilder()
+
+
 
             .setCustomId("abrirTicket")
 
-            .setPlaceholder("📂 Escolha uma categoria")
+
+
+            .setPlaceholder("📂 Selecionar atendimento")
+
+
 
             .addOptions(
 
+
                 {
-                    label: "🚨 Denunciar",
-                    description: "Abrir uma denúncia",
+
+                    label: "Denúncia",
+
+                    emoji: "🚨",
+
+                    description: "Registrar uma denúncia",
+
                     value: "denuncia"
+
                 },
 
+
                 {
-                    label: "❓ Dúvidas",
+
+                    label: "Suporte",
+
+                    emoji: "❓",
+
                     description: "Abrir atendimento",
+
                     value: "duvidas"
+
                 },
 
+
                 {
-                    label: "🪖 Solicitar Teste Tático",
-                    description: "Solicitar teste",
+
+                    label: "Teste Tático",
+
+                    emoji: "📋",
+
+                    description: "Solicitar avaliação",
+
                     value: "teste_tatico"
+
                 }
+
 
             );
 
+
+
         const row = new ActionRowBuilder()
+
+
 
             .addComponents(menu);
 
+
+
+
         await interaction.reply({
+
 
             embeds: [embed],
 
+
             components: [row]
+
 
         });
 
+
     }
+
 
 };
