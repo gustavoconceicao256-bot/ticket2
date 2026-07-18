@@ -11,16 +11,18 @@ const __dirname = path.dirname(__filename);
 export default async function commandHandler(client) {
 
 
-    const comandosPath = path.join(
-        __dirname,
-        "../Comandos"
+    const comandosPath = path.resolve(
+        process.cwd(),
+        "Comandos"
     );
-
 
 
     if (!fs.existsSync(comandosPath)) {
 
-        console.log("⚠️ Pasta Comandos não encontrada.");
+        console.log(
+            "⚠️ Pasta Comandos não encontrada:",
+            comandosPath
+        );
 
         return;
 
@@ -36,13 +38,9 @@ export default async function commandHandler(client) {
     for (const arquivo of arquivos) {
 
 
-        const caminho = path.join(
-            comandosPath,
-            arquivo
+        const comando = await import(
+            `../Comandos/${arquivo}`
         );
-
-
-        const comando = await import(caminho);
 
 
 
@@ -64,7 +62,6 @@ export default async function commandHandler(client) {
 
 
     }
-
 
 
     console.log("✅ Comandos carregados.");
