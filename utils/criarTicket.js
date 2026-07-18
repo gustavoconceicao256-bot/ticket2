@@ -60,6 +60,7 @@ export default async function criarTicket(interaction, categoria) {
         permissionOverwrites: [
 
 
+
             {
 
                 id: interaction.guild.id,
@@ -71,6 +72,7 @@ export default async function criarTicket(interaction, categoria) {
                 ]
 
             },
+
 
 
             {
@@ -90,9 +92,12 @@ export default async function criarTicket(interaction, categoria) {
             },
 
 
+
             ...config.cargos.finalizarTicket.map(cargo => ({
 
+
                 id: cargo,
+
 
                 allow: [
 
@@ -104,10 +109,13 @@ export default async function criarTicket(interaction, categoria) {
 
                 ]
 
+
             }))
 
 
+
         ]
+
 
 
     });
@@ -117,38 +125,41 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
+
     const embed = new EmbedBuilder()
 
 
+
         .setColor("#7C3AED")
+
 
 
         .setAuthor({
 
             name: "GTT • CENTRAL DE ATENDIMENTO",
 
-            iconURL: config.visual.thumbnail
+            iconURL: interaction.user.displayAvatarURL({
+
+                dynamic: true,
+
+                size: 1024
+
+            })
 
         })
 
 
-        .setTitle(
-            categoria === "denuncia"
-            ? "🚨 DENÚNCIA"
-            : "❓ SUPORTE"
-        )
+
+        .setTitle("🎫 Atendimento")
+
 
 
         .setDescription(`
 
-> Atendimento criado com sucesso.
-
-━━━━━━━━━━━━━━━━━━
-
-
-👤 **Solicitante**
+👤 **Usuário**
 
 ${interaction.user}
+
 
 
 📂 **Categoria**
@@ -156,7 +167,9 @@ ${interaction.user}
 \`${categoria.toUpperCase()}\`
 
 
+
 ━━━━━━━━━━━━━━━━━━
+
 
 
 🛡️ A equipe da **GTT** foi notificada.
@@ -164,7 +177,9 @@ ${interaction.user}
 Aguarde um membro responsável.
 
 
+
 ━━━━━━━━━━━━━━━━━━
+
 
 
 ⚡ **GTT • Sistema Oficial**
@@ -172,10 +187,23 @@ Aguarde um membro responsável.
 `)
 
 
-        .setThumbnail(config.visual.thumbnail)
+
+        .setThumbnail(
+
+            interaction.user.displayAvatarURL({
+
+                dynamic: true,
+
+                size: 1024
+
+            })
+
+        )
+
 
 
         .setImage(config.visual.banner)
+
 
 
         .setFooter({
@@ -184,7 +212,13 @@ Aguarde um membro responsável.
 
             iconURL: config.visual.thumbnail
 
-        });
+        })
+
+
+
+        .setTimestamp();
+
+
 
 
 
@@ -195,34 +229,50 @@ Aguarde um membro responsável.
     const botoes = new ActionRowBuilder()
 
 
+
         .addComponents(
 
 
 
-            // 🔴 Usuário sai do ticket
 
             new ButtonBuilder()
 
+
+
                 .setCustomId("sairTicket")
+
+
 
                 .setLabel("Sair do Ticket")
 
+
+
                 .setEmoji("🚪")
+
+
 
                 .setStyle(ButtonStyle.Danger),
 
 
 
 
-            // 🟢 Staff finaliza
+
 
             new ButtonBuilder()
 
+
+
                 .setCustomId("finalizarTicket")
+
+
 
                 .setLabel("Finalizar Ticket")
 
+
+
                 .setEmoji("✅")
+
+
 
                 .setStyle(ButtonStyle.Success)
 
@@ -236,19 +286,27 @@ Aguarde um membro responsável.
 
 
 
+
+
     await canal.send({
+
 
 
         content: `${interaction.user}`,
 
 
+
         embeds: [embed],
+
 
 
         components: [botoes]
 
 
+
     });
+
+
 
 
 
@@ -259,10 +317,13 @@ Aguarde um membro responsável.
     await interaction.editReply({
 
 
+
         content: `✅ Atendimento criado com sucesso: ${canal}`
 
 
+
     });
+
 
 
 }
