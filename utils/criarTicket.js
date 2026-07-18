@@ -25,7 +25,15 @@ export default async function criarTicket(interaction, categoria) {
 
 
     const canalExistente = interaction.guild.channels.cache.find(
-        canal => canal.name === nomeCanal
+
+        canal =>
+            canal.parentId === config.canais.tickets &&
+            canal.topic === interaction.user.id &&
+            (
+                canal.name.startsWith("suporte-") ||
+                canal.name.startsWith("denuncia-")
+            )
+
     );
 
 
@@ -34,7 +42,7 @@ export default async function criarTicket(interaction, categoria) {
 
         return interaction.editReply({
 
-            content: "⚠️ Você já possui um atendimento aberto."
+            content: "⚠️ Você já possui um atendimento aberto. Finalize ou cancele o atual antes de abrir outro."
 
         });
 
@@ -52,7 +60,6 @@ export default async function criarTicket(interaction, categoria) {
         parent: config.canais.tickets,
 
 
-        // guarda quem abriu para logs
         topic: interaction.user.id,
 
 
@@ -102,6 +109,7 @@ export default async function criarTicket(interaction, categoria) {
         ]
 
     });
+
 
 
 
@@ -224,6 +232,7 @@ ${interaction.user}
         components:[botoes]
 
     });
+
 
 
 
