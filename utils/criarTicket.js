@@ -43,6 +43,7 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
+
     const canal = await interaction.guild.channels.create({
 
         name: nomeCanal,
@@ -106,6 +107,7 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
+
     const embed = new EmbedBuilder()
 
 
@@ -131,18 +133,14 @@ export default async function criarTicket(interaction, categoria) {
 👤 **Usuário**
 ${interaction.user}
 
-
 📂 **Categoria**
 \`${categoria.toUpperCase()}\`
 
-
 ━━━━━━━━━━━━━━━━
-
 
 🛡️ Aguarde a equipe **GTT** atender seu chamado.
 
-
-⚡ Atendimento Privado
+⚡ Atendimento Privado • GTT
 
 `)
 
@@ -200,6 +198,7 @@ ${interaction.user}
 
 
 
+
             new ButtonBuilder()
 
                 .setCustomId("finalizarTicket")
@@ -220,15 +219,21 @@ ${interaction.user}
 
 
 
+
     await canal.send({
+
 
         content: `${interaction.user}`,
 
+
         embeds: [embed],
+
 
         components: [botoes]
 
+
     });
+
 
 
 
@@ -238,9 +243,12 @@ ${interaction.user}
 
     await interaction.editReply({
 
+
         content: `✅ Atendimento criado com sucesso: ${canal}`
 
+
     });
+
 
 
 }
