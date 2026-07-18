@@ -5,90 +5,63 @@ import {
     StringSelectMenuBuilder
 } from "discord.js";
 
-
 import config from "../config/config.js";
 
 
 export default {
 
-
     data: new SlashCommandBuilder()
-
         .setName("painel")
-
         .setDescription("Abrir painel de atendimento"),
 
-
     name: "painel",
-
-
 
     async execute(interaction) {
 
 
         const embed = new EmbedBuilder()
 
-
-            .setColor(config.visual.color)
-
+            .setColor("#22C55E")
 
             .setAuthor({
-
-                name: "GTT • SISTEMA OFICIAL",
-
+                name: "GTT • CENTRAL TÁTICA",
                 iconURL: config.visual.thumbnail
-
             })
 
-
-            .setTitle("🎫 CENTRAL DE ATENDIMENTO")
-
-
-
+            .setTitle("╭・🎫 CENTRAL DE ATENDIMENTO")
+            
             .setDescription(`
 
-> Bem-vindo ao sistema oficial da **GTT**.
+**Sistema Oficial GTT**
 
-━━━━━━━━━━━━━━━━━━━━━━
+Acesse um dos setores abaixo para iniciar um atendimento.
 
-🚨 **DENÚNCIAS**
+╭━━━━━━━━━━━━━━━━━━╮
 
-Reporte jogadores, situações ou problemas.
-
-
-━━━━━━━━━━━━━━━━━━━━━━
-
+🚨 **DENÚNCIA**
+\`Registrar ocorrência\`
 
 ❓ **SUPORTE**
-
-Tire dúvidas e solicite ajuda da equipe.
-
-
-━━━━━━━━━━━━━━━━━━━━━━
-
+\`Auxílio da equipe\`
 
 📋 **TESTE TÁTICO**
+\`Processo de avaliação\`
 
-Solicite sua avaliação para entrar na equipe.
-
-
-━━━━━━━━━━━━━━━━━━━━━━
+╰━━━━━━━━━━━━━━━━━━╯
 
 
-📂 Escolha uma categoria abaixo para iniciar.
+> ⚡ Atendimento organizado • GTT
 
 `)
 
-
-
             .setThumbnail(config.visual.thumbnail)
-
 
             .setImage(config.visual.banner)
 
-
-            .setFooter(config.visual.footer)
-
+            .setFooter({
+                text: "GTT • Sistema Oficial",
+                iconURL: config.visual.thumbnail
+            })
 
             .setTimestamp();
 
@@ -96,84 +69,50 @@ Solicite sua avaliação para entrar na equipe.
 
         const menu = new StringSelectMenuBuilder()
 
-
-
             .setCustomId("abrirTicket")
 
-
-
-            .setPlaceholder("📂 Selecionar atendimento")
-
-
+            .setPlaceholder("▸ Selecionar setor")
 
             .addOptions(
 
-
                 {
-
                     label: "Denúncia",
-
+                    description: "Registrar uma ocorrência",
                     emoji: "🚨",
-
-                    description: "Registrar uma denúncia",
-
                     value: "denuncia"
-
                 },
 
-
                 {
-
                     label: "Suporte",
-
+                    description: "Falar com a equipe",
                     emoji: "❓",
-
-                    description: "Abrir atendimento",
-
                     value: "duvidas"
-
                 },
 
-
                 {
-
                     label: "Teste Tático",
-
-                    emoji: "📋",
-
                     description: "Solicitar avaliação",
-
+                    emoji: "📋",
                     value: "teste_tatico"
-
                 }
-
 
             );
 
 
-
         const row = new ActionRowBuilder()
-
-
-
             .addComponents(menu);
-
 
 
 
         await interaction.reply({
 
-
             embeds: [embed],
 
-
             components: [row]
-
 
         });
 
 
     }
-
 
 };
