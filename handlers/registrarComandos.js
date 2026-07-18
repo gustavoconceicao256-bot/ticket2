@@ -40,9 +40,9 @@ export default async function registrarComandos(client) {
     for (const file of files) {
 
 
-        const command = await import(
-    `../Comandos/${file}`
-        );
+       const command = await import(
+    `../commands/${file}`
+);
 
 
         if(command.default?.data){
