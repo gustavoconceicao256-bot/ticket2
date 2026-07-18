@@ -1,9 +1,9 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 
-import commandHandler from "./Condutores/commandHandler.js";
-import eventHandler from "./Condutores/eventHandler.js";
-import registrarComandos from "./Condutores/registrarComandos.js";
+import commandHandler from "./condutores/commandHandler.js";
+import eventHandler from "./condutores/eventHandler.js";
+import registrarComandos from "./condutores/registrarComandos.js";
 
 import keepAlive from "./utils/keepAlive.js";
 
