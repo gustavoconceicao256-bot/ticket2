@@ -13,7 +13,7 @@ export default async function eventHandler(client) {
 
     const pasta = path.join(
         __dirname,
-        "../Eventos"
+        "../events"
     );
 
 
