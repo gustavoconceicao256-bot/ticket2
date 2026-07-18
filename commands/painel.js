@@ -18,6 +18,8 @@ export default {
 
     async execute(interaction) {
 
+    console.log("✅ COMANDO PAINEL EXECUTADO");
+
 
         const embed = new EmbedBuilder()
 
