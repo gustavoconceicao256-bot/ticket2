@@ -32,13 +32,11 @@ export default async function criarTicket(interaction, categoria) {
 
     if (canalExistente) {
 
-
         return interaction.editReply({
 
             content: "❌ Você já possui um atendimento aberto."
 
         });
-
 
     }
 
@@ -62,11 +60,9 @@ export default async function criarTicket(interaction, categoria) {
         permissionOverwrites: [
 
 
-
             {
 
                 id: interaction.guild.id,
-
 
                 deny: [
 
@@ -77,12 +73,9 @@ export default async function criarTicket(interaction, categoria) {
             },
 
 
-
             {
 
-
                 id: interaction.user.id,
-
 
                 allow: [
 
@@ -97,12 +90,9 @@ export default async function criarTicket(interaction, categoria) {
             },
 
 
-
             ...config.cargos.finalizarTicket.map(cargo => ({
 
-
                 id: cargo,
-
 
                 allow: [
 
@@ -114,13 +104,10 @@ export default async function criarTicket(interaction, categoria) {
 
                 ]
 
-
             }))
 
 
-
         ]
-
 
 
     });
@@ -130,64 +117,70 @@ export default async function criarTicket(interaction, categoria) {
 
 
 
-
     const embed = new EmbedBuilder()
 
 
+        .setColor("#7C3AED")
+
+
+        .setAuthor({
+
+            name: "GTT • CENTRAL DE ATENDIMENTO",
+
+            iconURL: config.visual.thumbnail
+
+        })
+
 
         .setTitle(
-
             categoria === "denuncia"
-
             ? "🚨 DENÚNCIA"
-
             : "❓ SUPORTE"
-
         )
-
 
 
         .setDescription(`
 
-👤 **Usuário**
+> Atendimento criado com sucesso.
+
+━━━━━━━━━━━━━━━━━━
+
+
+👤 **Solicitante**
 
 ${interaction.user}
 
 
+📂 **Categoria**
 
-📌 **Categoria**
-
-${categoria.toUpperCase()}
-
+\`${categoria.toUpperCase()}\`
 
 
 ━━━━━━━━━━━━━━━━━━
 
 
+🛡️ A equipe da **GTT** foi notificada.
 
-A equipe da **GTT** irá atender você em breve.
+Aguarde um membro responsável.
 
 
+━━━━━━━━━━━━━━━━━━
+
+
+⚡ **GTT • Sistema Oficial**
 
 `)
-
-
-
-        .setColor("#22C55E")
-
 
 
         .setThumbnail(config.visual.thumbnail)
 
 
-
         .setImage(config.visual.banner)
-
 
 
         .setFooter({
 
-            text: "GTT • Sistema Oficial",
+            text: "GTT • Atendimento Privado",
 
             iconURL: config.visual.thumbnail
 
@@ -199,32 +192,39 @@ A equipe da **GTT** irá atender você em breve.
 
 
 
-
-    const botao = new ActionRowBuilder()
-
+    const botoes = new ActionRowBuilder()
 
 
         .addComponents(
 
 
 
+            // 🔴 Usuário sai do ticket
+
             new ButtonBuilder()
 
+                .setCustomId("sairTicket")
 
+                .setLabel("Sair do Ticket")
+
+                .setEmoji("🚪")
+
+                .setStyle(ButtonStyle.Danger),
+
+
+
+
+            // 🟢 Staff finaliza
+
+            new ButtonBuilder()
 
                 .setCustomId("finalizarTicket")
 
+                .setLabel("Finalizar Ticket")
 
+                .setEmoji("✅")
 
-                .setLabel("Finalizar Atendimento")
-
-
-
-                .setEmoji("🔒")
-
-
-
-                .setStyle(ButtonStyle.Danger)
+                .setStyle(ButtonStyle.Success)
 
 
 
@@ -239,17 +239,13 @@ A equipe da **GTT** irá atender você em breve.
     await canal.send({
 
 
-
         content: `${interaction.user}`,
-
 
 
         embeds: [embed],
 
 
-
-        components: [botao]
-
+        components: [botoes]
 
 
     });
@@ -263,13 +259,10 @@ A equipe da **GTT** irá atender você em breve.
     await interaction.editReply({
 
 
-
         content: `✅ Atendimento criado com sucesso: ${canal}`
 
 
-
     });
-
 
 
 }
