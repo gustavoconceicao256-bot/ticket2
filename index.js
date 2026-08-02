@@ -157,23 +157,15 @@ await eventHandler(client);
 // LOGIN DISCORD
 // ===============================
 
-client.login(
+console.log("TOKEN:", process.env.TOKEN);
 
-    process.env.TOKEN
-
-)
-
-.then(() => {
-
-
-    console.log(
-
-        "✅ Login realizado com sucesso"
-
-    );
-
-
-})
+client.login(process.env.TOKEN)
+    .then(() => {
+        console.log("✅ Login realizado com sucesso");
+    })
+    .catch((error) => {
+        console.error("❌ Erro ao conectar o bot:", error);
+    });
 
 .catch((error) => {
 
