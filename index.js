@@ -30,19 +30,7 @@ client.commands = new Collection();
 
 keepAlive();
 
-// ===============================
-// READY
-// ===============================
 
-client.once("clientReady", async () => {
-
-    console.log(`🤖 Bot conectado como ${client.user.tag}`);
-
-    client.user.setActivity("Sistema Oficial GTT", {
-        type: ActivityType.Watching
-    });
-
-});
 // ===============================
 // HEARTBEAT
 // ===============================
