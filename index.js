@@ -152,11 +152,11 @@ await eventHandler(client);
 
 
 
-
 // ===============================
 // LOGIN DISCORD
 // ===============================
 
+console.log("TOKEN existe?", !!process.env.TOKEN);
 console.log("TOKEN:", process.env.TOKEN);
 
 client.login(process.env.TOKEN)
@@ -166,17 +166,3 @@ client.login(process.env.TOKEN)
     .catch((error) => {
         console.error("❌ Erro ao conectar o bot:", error);
     });
-
-.catch((error) => {
-
-
-    console.error(
-
-        "❌ Erro ao conectar o bot:",
-
-        error
-
-    );
-
-
-});
