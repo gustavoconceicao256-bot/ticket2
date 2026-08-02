@@ -151,18 +151,22 @@ await registrarComandos(client);
 await eventHandler(client);
 
 
-
 // ===============================
 // LOGIN DISCORD
 // ===============================
 
 console.log("TOKEN existe?", !!process.env.TOKEN);
-console.log("TOKEN:", process.env.TOKEN);
+console.log("Primeiros 10 caracteres:", process.env.TOKEN?.slice(0, 10));
+console.log("Tamanho do token:", process.env.TOKEN?.length);
 
 client.login(process.env.TOKEN)
     .then(() => {
+
         console.log("✅ Login realizado com sucesso");
+
     })
     .catch((error) => {
+
         console.error("❌ Erro ao conectar o bot:", error);
+
     });
