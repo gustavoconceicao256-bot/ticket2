@@ -1,3 +1,5 @@
+throw new Error("TESTE CHATGPT");
+
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
 
