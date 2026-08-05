@@ -13,127 +13,164 @@ export default {
 
     async execute(interaction) {
 
-
-        // COMANDOS SLASH
-        if (interaction.isChatInputCommand()) {
-
-            const comando = interaction.client.commands.get(
-                interaction.commandName
-            );
-
-            if (!comando) return;
+        try {
 
 
-            try {
+            // ===============================
+            // COMANDOS SLASH
+            // ===============================
+
+            if (interaction.isChatInputCommand()) {
+
+
+                const comando = interaction.client.commands.get(
+                    interaction.commandName
+                );
+
+
+                if (!comando) return;
+
 
                 await comando.execute(interaction);
 
 
-            } catch (error) {
+                return;
 
-                console.error(
-                    "Erro ao executar comando:",
-                    error
-                );
+            }
 
 
-                if (interaction.replied || interaction.deferred) {
-
-                    await interaction.followUp({
-
-                        content: "❌ Erro ao executar o comando.",
-                        ephemeral: true
-
-                    });
 
 
-                } else {
+            // ===============================
+            // MENU SELECT
+            // ===============================
 
-                    await interaction.reply({
+            if (interaction.isStringSelectMenu()) {
 
-                        content: "❌ Erro ao executar o comando.",
-                        ephemeral: true
 
-                    });
+                switch (interaction.customId) {
+
+
+                    case "abrirTicket":
+
+                        return await abrirTicket.execute(interaction);
+
 
                 }
 
-            }
-
-
-            return;
-
-        }
-
-
-
-
-
-        // MENU SELECT
-        if (interaction.isStringSelectMenu()) {
-
-
-            if (interaction.customId === "abrirTicket") {
-
-                return abrirTicket.execute(interaction);
-
-            }
-
-
-        }
-
-
-
-
-
-        // MODAL
-        if (interaction.isModalSubmit()) {
-
-
-            if (interaction.customId === "testeTatico") {
-
-                return testeTatico.execute(interaction);
-
-            }
-
-
-        }
-
-
-
-
-
-        // BOTÕES
-        if (interaction.isButton()) {
-
-
-            if (interaction.customId.startsWith("aceitarTeste_")) {
-
-                return aceitarTeste.execute(interaction);
 
             }
 
 
 
-            if (interaction.customId.startsWith("recusarTeste_")) {
 
-                return recusarTeste.execute(interaction);
+            // ===============================
+            // MODAIS
+            // ===============================
+
+            if (interaction.isModalSubmit()) {
+
+
+                switch (interaction.customId) {
+
+
+                    case "testeTatico":
+
+                        return await testeTatico.execute(interaction);
+
+
+                }
+
 
             }
 
 
 
-            if (interaction.customId === "finalizarTicket") {
 
-                return finalizarTicket.execute(interaction);
+
+            // ===============================
+            // BOTÕES
+            // ===============================
+
+            if (interaction.isButton()) {
+
+
+                const id = interaction.customId;
+
+
+
+                if (id.startsWith("aceitarTeste_")) {
+
+                    return await aceitarTeste.execute(interaction);
+
+                }
+
+
+
+                if (id.startsWith("recusarTeste_")) {
+
+                    return await recusarTeste.execute(interaction);
+
+                }
+
+
+
+                if (id === "finalizarTicket") {
+
+                    return await finalizarTicket.execute(interaction);
+
+                }
+
+
+
+                if (id === "sairTicket") {
+
+                    return await sairTicket.execute(interaction);
+
+                }
+
 
             }
 
 
 
-            if (interaction.customId === "sairTicket") {
+        } catch (error) {
 
-                return sairTicket.execute(interaction);
+
+            console.error(
+                "❌ Erro no interactionCreate:",
+                error
+            );
+
+
+
+            try {
+
+
+                if (!interaction.replied && !interaction.deferred) {
+
+
+                    await interaction.reply({
+
+                        content:
+                            "❌ Ocorreu um erro ao processar essa interação.",
+
+                        ephemeral: true
+
+                    });
+
+
+                }
+
+
+            } catch (err) {
+
+
+                console.error(
+                    "❌ Erro ao responder interação:",
+                    err
+                );
+
 
             }
 
@@ -142,6 +179,5 @@ export default {
 
 
     }
-
 
 };
