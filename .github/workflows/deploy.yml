@@ -12,4 +12,4 @@ jobs:
 
     steps:
       - name: Chamar Render
-        run: curl -X GET "COLE_AQUI_SEU_DEPLOY_HOOK"
+        run: curl -X GET "https://api.render.com/deploy/srv-d9db00gk1i2s73ekhrng?key=8qMFfH5Fm1g"
