@@ -1,0 +1,15 @@
+name: Deploy Render
+
+on:
+  schedule:
+    - cron: "0 */3 * * *"
+
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Chamar Render
+        run: curl -X GET "COLE_AQUI_SEU_DEPLOY_HOOK"
