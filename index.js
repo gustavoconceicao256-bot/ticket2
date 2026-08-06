@@ -76,9 +76,6 @@ try {
     await commandHandler(client);
     console.log("✅ Comandos carregados");
 
-    await registrarComandos(client);
-    console.log("✅ Slash Commands registrados");
-
     await eventHandler(client);
     console.log("✅ Eventos carregados");
 
@@ -88,6 +85,8 @@ try {
     process.exit(1);
 
 }
+
+
 // ===============================
 // LOGIN DISCORD
 // ===============================
@@ -100,23 +99,34 @@ if (!process.env.TOKEN) {
 }
 
 console.log("🔑 TOKEN carregada com sucesso");
-console.log("TOKEN INICIO:", process.env.TOKEN?.slice(0, 10));
-console.log("TOKEN FIM:", process.env.TOKEN?.slice(-10));
-console.log("TAMANHO:", process.env.TOKEN?.length);
-console.log("TOKEN TEM PONTO:", process.env.TOKEN.includes("."));
-console.log("TOKEN TAMANHO:", process.env.TOKEN.length);
+
 
 client.login(process.env.TOKEN)
-    .then(() => {
+
+    .then(async () => {
 
         console.log("✅ Login realizado com sucesso");
 
+        try {
+
+            await registrarComandos(client);
+
+            console.log("✅ Slash Commands registrados");
+
+        } catch (error) {
+
+            console.error("❌ Erro ao registrar comandos:", error);
+
+        }
+
     })
+
     .catch((error) => {
 
         console.error("❌ Erro ao conectar o bot:", error);
 
     });
+
 
 // ===============================
 // EXPORT
