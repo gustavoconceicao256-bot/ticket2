@@ -100,7 +100,9 @@ if (!process.env.TOKEN) {
 }
 
 console.log("🔑 TOKEN carregada com sucesso");
-console.log("📏 Tamanho do token:", process.env.TOKEN.length);
+console.log("TOKEN INICIO:", process.env.TOKEN?.slice(0, 10));
+console.log("TOKEN FIM:", process.env.TOKEN?.slice(-10));
+console.log("TAMANHO:", process.env.TOKEN?.length);
 
 client.login(process.env.TOKEN)
     .then(() => {
